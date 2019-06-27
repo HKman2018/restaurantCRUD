@@ -14,7 +14,7 @@ header {
   position: relative;
   z-index: -1;
   margin: -5px;
-  height: 360px;
+  height: 260px;
   background: #dddddd center center url('https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/5720/restaurants-list-cover.jpg');
   background-size: cover;
   filter: blur(3px);
@@ -76,6 +76,25 @@ header {
   text-align: center;
   font-size: 3rem;
   text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+.restaurant-show{
+  text-align: right;
+  padding: 10px 10px 10px;
+
+}
+.show-button,.edit-button,.delete-button{
+  font-size: 0.8rem;
+  border-radius: 8px;
+}
+
+.row {
+  margin:10px;
+   
+   width: 90%;
+}
+
+.restaurantRate ::placeholder{
+  color: red;
 }
 
 @media screen and (max-width: 992px) {

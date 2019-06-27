@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const exphbs = require('express-handlebars')
 const mongoose = require('mongoose')
-const Restaurant = require('./models/restaurant')
+const bodyParser = require('body-parser')
 // const restaurantList = require('./restaurant.json')
 
 
@@ -25,14 +25,41 @@ app.set('view engine', 'handlebars')
 
 //public => CSS
 app.use(express.static('public'))
+app.use(bodyParser.urlencoded({ extended: true }))
 
-
+//models
+const Restaurant = require('./models/restaurant')
 // set route
+
+
 app.get('/', (req, res) => {
   Restaurant.find((err, restaurant) => {
     return res.render('index', { restaurant: restaurant })
   })
 })
+//新增頁面
+app.get('/restaurants/new', (req, res) => {
+  res.render('new')
+})
+app.post('/restaurants', (req, res) => {
+  const restaurant = new Restaurant({
+    name: req.body.name,
+    name_en: req.body.name_en,
+    category: req.body.category,
+    image: req.body.image,
+    location: req.body.location,
+    phone: req.body.phone,
+    google_map: req.body.google_map,
+    rating: req.body.rating,
+    description: req.body.description,
+  })
+  restaurant.save(err => {
+    if (err) return console.log(err)
+    return res.redirect('/')
+  })
+})
+
+
 app.get('/search', (req, res) => {
   const keyword = req.query.keyword
   console.log('keyword', keyword)
@@ -47,8 +74,10 @@ app.get('/search', (req, res) => {
 app.get('/restaurants/:restaurant_id', (req, res) => {
 
   const selectRestaurant = Restaurant.filter(restaurant => restaurant.id == req.params.restaurant_id)
-  res.render('show', { restaurant: selectRestaurant[0] })
+  res.render('detail', { restaurant: selectRestaurant[0] })
 })
+
+
 
 
 //express port 3000
