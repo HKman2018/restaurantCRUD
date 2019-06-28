@@ -3,9 +3,7 @@ const Schema = mongoose.Schema
 
 
 const restaurantSchema = new Schema({
-  id: {
-    type: Number,
-  },
+
   name: {
     type: String,
     required: true,
@@ -20,12 +18,15 @@ const restaurantSchema = new Schema({
   },
   image: {
     type: String,
+    required: true,
   },
   location: {
     type: String,
+    required: true,
   },
   phone: {
     type: String,
+    required: true,
   },
   google_map: {
     type: String,
@@ -37,10 +38,6 @@ const restaurantSchema = new Schema({
   description: {
     type: String,
   },
-  data: {
-    type: Date,
-    default: Date.now,
-  }
 })
 
 module.exports = mongoose.model('Restaurant', restaurantSchema)

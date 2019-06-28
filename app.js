@@ -34,7 +34,7 @@ const Restaurant = require('./models/restaurant')
 
 app.get('/', (req, res) => {
   Restaurant.find((err, restaurant) => {
-    return res.render('index', { restaurant: restaurant })
+    return res.render('index', { restaurants: restaurant })
   })
 })
 //新增頁面
@@ -54,8 +54,15 @@ app.post('/restaurants', (req, res) => {
     description: req.body.description,
   })
   restaurant.save(err => {
-    if (err) return console.log(err)
+    if (err) return console.error(err)
     return res.redirect('/')
+  })
+})
+
+app.get('/restaurants/:id', (req, res) => {
+  Restaurant.findById(req.params.id, (err, restaurant) => {
+    if (err) return console.error(err)
+    return res.render('detail', { restaurant: restaurant })
   })
 })
 
@@ -71,11 +78,7 @@ app.get('/search', (req, res) => {
 
 })
 
-app.get('/restaurants/:restaurant_id', (req, res) => {
 
-  const selectRestaurant = Restaurant.filter(restaurant => restaurant.id == req.params.restaurant_id)
-  res.render('detail', { restaurant: selectRestaurant[0] })
-})
 
 
 
