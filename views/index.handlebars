@@ -16,37 +16,39 @@
 </div>
 
 
-<div class="container mt-5">
+<div class="container mt-5 ">
   <div class="row">
-    <div class="col-md-10 col-12 mx-auto ">
-      <div class="card-columns">
+    <div class=" col-md-12 col-12  d-inline">
+      <div class="card-columns row ">
         {{#each restaurants}}
-        <a href="/restaurants/{{{this.id}}}" class="text-secondary">
-          <div class="card mb-3">
-            <img class="card-img-top" src="{{{this.image}}}" alt="Sababa 沙巴巴中東美食">
-            <div class="card-body p-3">
-              <h6 class="card-title mb-1">{{{this.name}}}</h6>
+        <div class="col-md-4 ">
+          <a href="/restaurants/{{{this.id}}}" class="text-secondary">
+            <div class="card mb-3">
+              <img class="card-img-top p-2" src="{{{this.image}}}" alt="Sababa 沙巴巴中東美食">
+              <div class="card-body p-3">
+                <h6 class="card-title mb-1">{{{this.name}}}</h6>
 
-              <div class="restaurant-category mb-1">
-                <i class="fas fa-utensils pr-2"></i> {{{this.category}}}
+                <div class="restaurant-category mb-1">
+                  <i class="fas fa-utensils pr-2"></i> {{{this.category}}}
+                </div>
+                <div class="restaurant-category mb-1">
+                  <i class="fas fa-utensils pr-2"></i>tel: {{{this.phone}}}
+                </div>
+                <span class="badge badge-pill badge-danger font-weight-normal">
+                  {{{this.rating}}}
+                  <i class="fas fa-star fa-xs"></i>
+                </span>
               </div>
-              <div class="restaurant-category mb-1">
-                <i class="fas fa-utensils pr-2"></i>tel: {{{this.phone}}}
+              <div class="restaurant-show mb-2">
+                <a class="show-button btn btn-info" href="/restaurants/{{{this.id}}}">詳細介紹</a>
+                <a class="edit-button btn btn-info" href="/restaurants/{{{this.id}}}/edit">修改</a>
+                <form action="/restaurants/{{{this.id}}}/delete" method="POST" class="delete-btn ">
+                  <button class="delete-button btn btn-info">刪除</button>
+                </form>
               </div>
-              <span class="badge badge-pill badge-danger font-weight-normal">
-                {{{this.rating}}}
-                <i class="fas fa-star fa-xs"></i>
-              </span>
             </div>
-            <div class="restaurant-show ">
-              <a class="show-button btn btn-info" href="/restaurants/{{{this.id}}}">詳細介紹</a>
-              <a class="edit-button btn btn-info" href="/restaurants/{{{this.id}}}/edit">修改</a>
-              <form action="/restaurants/{{{this.id}}}/delete" method="POST" class="delete-btn">
-                <button class="delete-button btn btn-info">刪除</button>
-              </form>
-            </div>
-          </div>
-        </a>
+          </a>
+        </div>
         {{/each}}
       </div>
     </div>

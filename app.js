@@ -1,10 +1,11 @@
 const express = require('express')
 const app = express()
+const port = 3000
 const exphbs = require('express-handlebars')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const helpers = require('./public/handlebarsHelpers')
-// const restaurantList = require('./restaurant.json')
+const Restaurant = require('./models/restaurant')
 
 
 //setting mongoose connect
@@ -26,99 +27,18 @@ app.set('view engine', 'handlebars')
 
 //public => CSS
 app.use(express.static('public'))
+
+//bodyParser
 app.use(bodyParser.urlencoded({ extended: true }))
 
-//models
-const Restaurant = require('./models/restaurant')
-// set route
-
-
-app.get('/', (req, res) => {
-  Restaurant.find((err, restaurant) => {
-    return res.render('index', { restaurants: restaurant })
-  })
-})
-//新增頁面
-app.get('/restaurants/new', (req, res) => {
-  res.render('new')
-})
-app.post('/restaurants', (req, res) => {
-  const restaurant = new Restaurant({
-    name: req.body.name,
-    name_en: req.body.name_en,
-    category: req.body.category,
-    image: req.body.image,
-    location: req.body.location,
-    phone: req.body.phone,
-    google_map: req.body.google_map,
-    rating: req.body.rating,
-    description: req.body.description,
-  })
-  restaurant.save(err => {
-    if (err) return console.error(err)
-    return res.redirect('/')
-  })
-})
-
-app.get('/restaurants/:id', (req, res) => {
-  Restaurant.findById(req.params.id, (err, restaurant) => {
-    if (err) return console.error(err)
-    return res.render('detail', { restaurant: restaurant })
-  })
-})
-
-app.get('/restaurants/:id/edit', (req, res) => {
-  Restaurant.findById(req.params.id, (err, restaurant) => {
-    return res.render('edit', { restaurant: restaurant })
-  })
-})
-
-app.post('/restaurants/:id', (req, res) => {
-  Restaurant.findById(req.params.id, (err, restaurant) => {
-    if (err) return console.error(err)
-    restaurant.name = req.body.name
-    restaurant.name_en = req.body.name_en
-    restaurant.category = req.body.category
-    restaurant.image = req.body.image
-    restaurant.location = req.body.location
-    restaurant.phone = req.body.phone
-    restaurant.google_map = req.body.google_map
-    restaurant.rating = req.body.rating
-    restaurant.description = req.body.description
-    restaurant.save(err => {
-      if (err) return console.error(err)
-      return res.redirect('/restaurants/' + restaurant.id)
-    })
-  })
-})
-
-app.post('/restaurants/:id/delete', (req, res) => {
-  Restaurant.findById(req.params.id, (err, restaurant) => {
-    restaurant.remove((err) => {
-      return res.redirect('/')
-    })
-  })
-})
-
-
-
-app.get('/search', (req, res) => {
-  const keyword = req.query.keyword
-  console.log('keyword', keyword)
-  const restaurant = Restaurant.filter(restaurant => {
-    return restaurant.name.toLowerCase().includes(keyword.toLowerCase())
-  })
-  console.log('restaurant', restaurant)
-  res.render('index', { restaurant: Restaurant, keyword: keyword })
-
-})
-
-
-
+//router
+app.use('/', require('./routes/home'))
+app.use('/search', require('./routes/search'))
+app.use('/restaurants', require('./routes/restaurants'))
 
 
 
 //express port 3000
 app.listen(3000, () => {
-  console.log('app is running')
+  console.log('Express is listening on localhost:${port}')
 })

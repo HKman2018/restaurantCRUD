@@ -88,14 +88,9 @@ header {
   display: inline;
 }
 
-.create{
-  text-align: center;
-}
 
 .row {
-  margin:10px;
-   
-   width: 90%;
+  margin:10px; 
 }
 
 .restaurantRate ::placeholder{
