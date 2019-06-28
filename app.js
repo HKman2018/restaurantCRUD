@@ -3,6 +3,7 @@ const app = express()
 const exphbs = require('express-handlebars')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
+const helpers = require('./public/handlebarsHelpers')
 // const restaurantList = require('./restaurant.json')
 
 
@@ -66,6 +67,30 @@ app.get('/restaurants/:id', (req, res) => {
   })
 })
 
+app.get('/restaurants/:id/edit', (req, res) => {
+  Restaurant.findById(req.params.id, (err, restaurant) => {
+    return res.render('edit', { restaurant: restaurant })
+  })
+})
+
+app.post('/restaurants/:id', (req, res) => {
+  Restaurant.findById(req.params.id, (err, restaurant) => {
+    if (err) return console.error(err)
+    restaurant.name = req.body.name
+    restaurant.name_en = req.body.name_en
+    restaurant.category = req.body.category
+    restaurant.image = req.body.image
+    restaurant.location = req.body.location
+    restaurant.phone = req.body.phone
+    restaurant.google_map = req.body.google_map
+    restaurant.rating = req.body.rating
+    restaurant.description = req.body.description
+    restaurant.save(err => {
+      if (err) return console.error(err)
+      return res.redirect('/restaurants/' + restaurant.id)
+    })
+  })
+})
 
 app.get('/search', (req, res) => {
   const keyword = req.query.keyword
