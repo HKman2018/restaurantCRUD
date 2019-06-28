@@ -84,6 +84,13 @@ header {
   font-size: 0.8rem;
   border-radius: 8px;
 }
+.delete-btn{
+  display: inline;
+}
+
+.create{
+  text-align: center;
+}
 
 .row {
   margin:10px;

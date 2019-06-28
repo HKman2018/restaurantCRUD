@@ -92,6 +92,16 @@ app.post('/restaurants/:id', (req, res) => {
   })
 })
 
+app.post('/restaurants/:id/delete', (req, res) => {
+  Restaurant.findById(req.params.id, (err, restaurant) => {
+    restaurant.remove((err) => {
+      return res.redirect('/')
+    })
+  })
+})
+
+
+
 app.get('/search', (req, res) => {
   const keyword = req.query.keyword
   console.log('keyword', keyword)

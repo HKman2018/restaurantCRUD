@@ -41,7 +41,9 @@
             <div class="restaurant-show ">
               <a class="show-button btn btn-info" href="/restaurants/{{{this.id}}}">詳細介紹</a>
               <a class="edit-button btn btn-info" href="/restaurants/{{{this.id}}}/edit">修改</a>
-              <a class="delete-button btn btn-info" href="">刪除</a>
+              <form action="/restaurants/{{{this.id}}}/delete" method="POST" class="delete-btn">
+                <button class="delete-button btn btn-info">刪除</button>
+              </form>
             </div>
           </div>
         </a>
