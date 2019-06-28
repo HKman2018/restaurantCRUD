@@ -18,3 +18,6 @@
       . npm install
       
 ## 使用方法
+
+
+![nono](https://media.giphy.com/media/S3hvceJCjk7B2bUoqL/giphy.gif)
