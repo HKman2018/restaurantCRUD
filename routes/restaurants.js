@@ -2,7 +2,32 @@ const express = require('express')
 const router = express.Router()
 const Restaurant = require('../models/restaurant')
 
-
+//篩選
+router.get('/sort/:id', (req, res) => {
+  console.log('req.params.id', req.params.id)
+  let filter;
+  switch (req.params.id) {
+    case 'a-z':
+      filter = { name_en: 1 }
+      break;
+    case 'z-a':
+      filter = { name_en: -1 }
+      break;
+    case 'rating':
+      filter = { rating: -1 }
+      break;
+    case 'location':
+      filter = { location: -1 }
+      break;
+    case 'category':
+      filter = { category: -1 }
+      break;
+  }
+  Restaurant.find({}).sort(filter).exec((err, restaurant) => {
+    if (err) return console.error(err)
+    return res.render('index', { restaurants: restaurant })
+  })
+})
 //新增頁面
 router.get('/new', (req, res) => {
   res.render('new')
@@ -24,7 +49,7 @@ router.post('/', (req, res) => {
     return res.redirect('/')
   })
 })
-
+//detail
 router.get('/:id', (req, res) => {
   Restaurant.findById(req.params.id, (err, restaurant) => {
     if (err) return console.error(err)
@@ -37,8 +62,8 @@ router.get('/:id/edit', (req, res) => {
     return res.render('edit', { restaurant: restaurant })
   })
 })
-
-router.post('/:id', (req, res) => {
+//更新內容
+router.put('/:id', (req, res) => {
   Restaurant.findById(req.params.id, (err, restaurant) => {
     if (err) return console.error(err)
     restaurant.name = req.body.name
@@ -57,9 +82,11 @@ router.post('/:id', (req, res) => {
   })
 })
 //刪除
-router.post('/:id/delete', (req, res) => {
+router.delete('/:id/delete', (req, res) => {
   Restaurant.findById(req.params.id, (err, restaurant) => {
+    if (err) return console.error(err)
     restaurant.remove((err) => {
+      if (err) return console.error(err)
       return res.redirect('/')
     })
   })

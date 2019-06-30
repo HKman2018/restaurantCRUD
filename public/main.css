@@ -88,9 +88,11 @@ header {
   display: inline;
 }
 
-
 .row {
   margin:10px; 
+}
+.dropdown-toggle{
+  margin-right:6rem ;
 }
 
 .restaurantRate ::placeholder{

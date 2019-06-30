@@ -40,7 +40,7 @@
         <div class="detail-btn mb-3">
           <a class="show-button btn btn-info" href="/">返回</a>
           <a class="edit-button btn btn-info" href="/restaurants/{{{restaurant.id}}}/edit">修改</a>
-          <form action="/restaurants/{{{restaurant.id}}}/delete" method="POST" class="delete-btn">
+          <form action="/restaurants/{{{restaurant.id}}}/delete?_method=DELETE" method="POST" class="delete-btn">
             <button class="delete-button btn btn-info">刪除</button>
           </form>
         </div>
