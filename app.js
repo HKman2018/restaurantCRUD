@@ -42,6 +42,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use('/', require('./routes/home'))
 app.use('/search', require('./routes/search'))
 app.use('/restaurants', require('./routes/restaurants'))
+app.use('/users', require('./routes/user'))
 
 
 
