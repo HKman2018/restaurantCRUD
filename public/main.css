@@ -8,7 +8,10 @@ header {
 
 .navbar .navbar-brand:hover {
   color: #226089;
-}
+ }
+ #newRestaurant{
+	 padding-left: 500px;
+} 
 /* <======banner====> */
 .banner {
   position: relative;
@@ -130,7 +133,7 @@ header {
 
 .login-html .tab,
 .login-form .group .label,
-.login-form .group .button{
+.login-form .group .button,#login-facebook-btn{
 	text-transform:uppercase;
 }
 .login-html .tab{
@@ -170,7 +173,7 @@ header {
 	border-radius:25px;
 	background:rgba(202, 42, 42, 0.1);
 }
-.register-btn{
+.register-btn,#login-facebook-btn{
   border:none;
   color:#fff;
 	padding:15px 20px;
@@ -254,22 +257,31 @@ header {
 	border-radius:25px;
 	background:#71a2f8;
 }
+#login:hover,#login-register-btn:hover,#login-facebook-btn:hover,#register:hover,#register-login-btn:hover{
+	background-color: rgb(7, 156, 156);
+	text-decoration: none;
+	color:rgb(136, 238, 204);
+}
 @media screen and (max-width: 992px) { 
-  
+  #newRestaurant{
+		padding-left: 100px;
+	}
   .card img{
     height: 115px;
   }
 }
 
 @media screen and (max-width: 768px) {
-  
+#newRestaurant{
+		padding:0;
+	}
   .restaurant-show-title {
     font-size: 2rem;
   }
 }
 
 @media screen and (max-width: 575px) {
-  
+    
   .card img{
     height: auto;
   }

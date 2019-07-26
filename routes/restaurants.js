@@ -1,9 +1,10 @@
 const express = require('express')
 const router = express.Router()
 const Restaurant = require('../models/restaurant')
+const { authenticated } = require('../config/auth')
 
 //篩選
-router.get('/sort/:id', (req, res) => {
+router.get('/sort/:id', authenticated, (req, res) => {
   console.log('req.params.id', req.params.id)
   let filter;
   switch (req.params.id) {
@@ -23,16 +24,16 @@ router.get('/sort/:id', (req, res) => {
       filter = { category: -1 }
       break;
   }
-  Restaurant.find({}).sort(filter).exec((err, restaurant) => {
+  Restaurant.find({ userId: req.user._id }).sort(filter).exec((err, restaurant) => {
     if (err) return console.error(err)
     return res.render('index', { restaurants: restaurant })
   })
 })
 //新增頁面
-router.get('/new', (req, res) => {
+router.get('/new', authenticated, (req, res) => {
   res.render('new')
 })
-router.post('/', (req, res) => {
+router.post('/', authenticated, (req, res) => {
   const restaurant = new Restaurant({
     name: req.body.name,
     name_en: req.body.name_en,
@@ -43,6 +44,7 @@ router.post('/', (req, res) => {
     google_map: req.body.google_map,
     rating: req.body.rating,
     description: req.body.description,
+    userId: req.user._id,
   })
   restaurant.save(err => {
     if (err) return console.error(err)
@@ -50,21 +52,21 @@ router.post('/', (req, res) => {
   })
 })
 //detail
-router.get('/:id', (req, res) => {
-  Restaurant.findById(req.params.id, (err, restaurant) => {
+router.get('/:id', authenticated, (req, res) => {
+  Restaurant.findOne({ _id: req.params.id, userId: req.user._id }, (err, restaurant) => {
     if (err) return console.error(err)
     return res.render('detail', { restaurant: restaurant })
   })
 })
 //修改
-router.get('/:id/edit', (req, res) => {
-  Restaurant.findById(req.params.id, (err, restaurant) => {
+router.get('/:id/edit', authenticated, (req, res) => {
+  Restaurant.findOne({ _id: req.params.id, userId: req.user._id }, (err, restaurant) => {
     return res.render('edit', { restaurant: restaurant })
   })
 })
 //更新內容
-router.put('/:id', (req, res) => {
-  Restaurant.findById(req.params.id, (err, restaurant) => {
+router.put('/:id', authenticated, (req, res) => {
+  Restaurant.findOne({ _id: req.params.id, userId: req.user._id }, (err, restaurant) => {
     if (err) return console.error(err)
     restaurant.name = req.body.name
     restaurant.name_en = req.body.name_en
@@ -82,8 +84,8 @@ router.put('/:id', (req, res) => {
   })
 })
 //刪除
-router.delete('/:id/delete', (req, res) => {
-  Restaurant.findById(req.params.id, (err, restaurant) => {
+router.delete('/:id/delete', authenticated, (req, res) => {
+  Restaurant.findOne({ _id: req.params.id, userId: req.user._id }, (err, restaurant) => {
     if (err) return console.error(err)
     restaurant.remove((err) => {
       if (err) return console.error(err)

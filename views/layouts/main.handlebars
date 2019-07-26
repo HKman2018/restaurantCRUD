@@ -7,8 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Restaurant CRUD</title>
 
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://bootswatch.com/4/minty/bootstrap.min.css">
 
   <link rel="stylesheet" href="/main.css">
 </head>
@@ -23,7 +22,20 @@
             width="30" height="30" class="d-inline-block align-top" alt="我的餐廳清單">
           我的餐廳清單
         </a>
-        <a class="btn btn-info" href="/restaurants/new">加入新餐廳</a>
+        <div id="newRestaurant">
+          {{#if isAuthenticated}}
+          <a class="btn btn-info " href="/restaurants/new">加入新餐廳</a>
+          {{else}}
+          <a href="/users/login" class=" "></a>
+          {{/if}}
+        </div>
+        <div id="isAuthenticated-btn">
+          {{#if isAuthenticated}}
+          <a href="/users/logout" class="btn btn-info d-flex justify-content-start ">Logout</a>
+          {{else}}
+          <a href="/users/login" class="btn btn-info ">Login</a>
+          {{/if}}
+        </div>
       </div>
     </nav>
 

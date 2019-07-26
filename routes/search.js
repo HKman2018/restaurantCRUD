@@ -1,9 +1,10 @@
 const express = require('express')
 const router = express.Router()
 const Restaurant = require('../models/restaurant')
+const { authenticated } = require('../config/auth')
 
 //search
-router.get('/', (req, res) => {
+router.get('/', authenticated, (req, res) => {
   const keyword = req.query.keyword
   Restaurant.find((err, restaurant) => {
     if (err) return console.error(err)
