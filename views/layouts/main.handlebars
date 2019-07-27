@@ -22,29 +22,28 @@
             width="30" height="30" class="d-inline-block align-top" alt="我的餐廳清單">
           我的餐廳清單
         </a>
-        <h3 class="text-info"><strong>{{userName}}</strong></h3>
-        <div id="newRestaurant">
-          {{#if isAuthenticated}}
 
-          <a class="btn btn-info " href="/restaurants/new">加入新餐廳</a>
+        <div class="d-flex justify-content-end" id="newRestaurant">
+          {{#if isAuthenticated}}
+          <h4 class=" text-info mr-2 "><strong>{{userName}}</strong></h4>
+          <a class="btn btn-info  ml-2" href="/restaurants/new">加入新餐廳</a>
           {{else}}
           <a href="/users/login" class=" "></a>
           {{/if}}
-        </div>
-        <div id="isAuthenticated-btn">
+          {{!-- <div id="isAuthenticated-btn"> --}}
           {{#if isAuthenticated}}
-          <a href="/users/logout" class="btn btn-info d-flex justify-content-start ">Logout</a>
+          <a href="/users/logout" class="btn btn-info ml-2 ">Logout</a>
           {{else}}
           <a href="/users/login" class="btn btn-info ">Login</a>
           {{/if}}
+
         </div>
-      </div>
     </nav>
 
     <div class="banner"></div>
   </header>
 
-  <div class="banner"></div>
+  {{!-- <div class="banner"></div> --}}
   {{{body}}}
   <script src="https://kit.fontawesome.com/0f62aa162d.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
