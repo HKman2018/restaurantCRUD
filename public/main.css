@@ -113,7 +113,7 @@ header {
 .login-html{
 	 width:100%;  
 	position:absolute;
-	padding:90px 70px 50px 70px;
+	padding:50px 30px 50px 30px;
   background:rgba(234, 247, 245, 0.39);
   box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
 }
@@ -180,15 +180,23 @@ header {
 	border-radius:25px;
 	background:#71a2f8;
 }
-
-.login-form .group .label{
+#message,#message-btn{
+	 border:none;
+	 font-size: 1rem;
+	padding:15px 20px;
+	border-radius:25px;
+}
+#tab{
+color:#33b5e5
+}
+.login-form .group .label {
 	color:rgb(48, 192, 211);
 	font-size:18px;
 }
 .login-form .group .button{
 	background:#71a2f8;
 }
-.login-form .group label .icon{
+.login-form .group .label .icon{
 	width:15px;
 	height:15px;
 	border-radius:2px;
@@ -206,14 +214,14 @@ header {
 	-webkit-transition:all .2s ease-in-out 0s;
 	transition:all .2s ease-in-out 0s;
 } */
-.login-form .group label .icon:before{
+.login-form .group .label .icon:before{
 	left:3px;
 	width:5px;
 	bottom:6px;
 	-webkit-transform:scale(0) rotate(0);
 	        transform:scale(0) rotate(0);
 }
-.login-form .group label .icon:after{
+.login-form .group .label .icon:after{
 	top:6px;
 	right:0;
 	-webkit-transform:scale(0) rotate(0);

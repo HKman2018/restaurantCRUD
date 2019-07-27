@@ -15,6 +15,9 @@ const Restaurant = require('./models/restaurant')
 //載入express-session
 const session = require('express-session')
 const passport = require('passport')
+//載入connect-flash
+const flash = require('connect-flash')
+
 //判別開發環境
 if (process.env.NODE_ENV !== 'production') {      // 如果不是 production 模式
   require('dotenv').config()                      // 使用 dotenv 讀取 .env 檔案
@@ -54,10 +57,15 @@ app.use(passport.initialize())
 app.use(passport.session())
 //載入passport config
 require('./config/passport')(passport) //(function(passport))
+
+//use connect flash
+app.use(flash())
 //登入後可以取得使用者資訊
 app.use((req, res, next) => {
   res.locals.users = req.user
   res.locals.isAuthenticated = req.isAuthenticated()
+  res.locals.success_msg = req.flash('success_msg')
+  res.locals.warning_msg = req.flash('warning_msg')
   next()
 })
 //router

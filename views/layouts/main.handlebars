@@ -22,8 +22,10 @@
             width="30" height="30" class="d-inline-block align-top" alt="我的餐廳清單">
           我的餐廳清單
         </a>
+        <h3 class="text-info"><strong>{{userName}}</strong></h3>
         <div id="newRestaurant">
           {{#if isAuthenticated}}
+
           <a class="btn btn-info " href="/restaurants/new">加入新餐廳</a>
           {{else}}
           <a href="/users/login" class=" "></a>

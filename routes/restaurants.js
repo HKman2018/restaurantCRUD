@@ -5,7 +5,7 @@ const { authenticated } = require('../config/auth')
 
 //篩選
 router.get('/sort/:id', authenticated, (req, res) => {
-  console.log('req.params.id', req.params.id)
+
   let filter;
   switch (req.params.id) {
     case 'a-z':
@@ -25,8 +25,9 @@ router.get('/sort/:id', authenticated, (req, res) => {
       break;
   }
   Restaurant.find({ userId: req.user._id }).sort(filter).exec((err, restaurant) => {
+
     if (err) return console.error(err)
-    return res.render('index', { restaurants: restaurant })
+    return res.render('index', { restaurants: restaurant, })
   })
 })
 //新增頁面

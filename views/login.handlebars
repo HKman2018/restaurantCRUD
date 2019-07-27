@@ -2,9 +2,10 @@
   <div class="col-md-4 m-auto">
     <div class="login-wrap">
       <div class="login-html text-center ">
-        <label for="tab-1" class="tab" style="color:#33b5e5;">
-          <h1>LOGIN</h1>
+        <label for="tab-1" class="tab">
+          <h1 id="tab">login</h1>
         </label>
+        {{> messages}}
         <form action="/users/login" method="post">
           <div class="login-form">
             <div class="sign-in-htm">
