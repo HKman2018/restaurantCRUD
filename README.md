@@ -7,7 +7,7 @@
    ![nono](https://media.giphy.com/media/S3hvceJCjk7B2bUoqL/giphy.gif)
 # 簡介
 
-       網站主要介紹餐廳的資料和食評 
+       網站加入了會員註冊登記,登記後可加入自己喜愛的餐廳而且加以評分 
 
 # 安裝方法
 
@@ -18,11 +18,28 @@
       
       . npm install 
       
-      . npm install exress 
+      . npm install express 
       
-      . npm install nodemon
+      . npm install nodemon 1.19.1
+
+      . npm install bcryptjs
+
+      . npm install body-parser
+
+      . npm install connect-flash
+     
+      . npm install express-handlebars
+
+      . npm install handlebars-helpers
+   
+      . npm install mongoose 5.6.0
+    
+      . npm install passport 0.4.0
+
+      . npm install passport-facebook 3.0.0
+       
+      . npm install passport-local 1.0.0 
       
 ## 使用方法
-   使用者可以增加喜愛的餐廳,可以為餐廳進行更新資料,可以搜尋餐廳
-
+    使用者可以使用會員註冊登入,但必須註冊為會員才能登入餐廳的選單 
    ![nono](https://media.giphy.com/media/J269hu1G6LutDAyaUb/giphy.gif)
